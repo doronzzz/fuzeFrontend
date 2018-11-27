@@ -38,6 +38,7 @@
     }
 </script>
 
+<<<<<<< HEAD
 <style scooped>
 .grid{
     display: grid;
@@ -45,4 +46,8 @@
     grid-column-gap: 1em;
     grid-row-gap: 1em;
 }
+=======
+<style scoped>
+
+>>>>>>> 6a7d9a188effb2a35ab844a7e38c7f65f0aebeec
 </style>
