@@ -6,7 +6,7 @@
 			<b-col md="5">
 				<img v-bind:src="selectedImage" class="product__image">
 				<b-row class="product__images mt-2">
-					<b-col md="6" lg="4" v-for="image in product.images">
+					<b-col md="6" lg="4" v-if="product.images.length > 1" v-for="image in product.images">
 						<img v-bind:src="image" class="product__images__image" @click="selectImage(image)" />
 					</b-col>
 				</b-row>
