@@ -1,33 +1,32 @@
 <template>
-<div class="container">
-<b-card-group deck>
-	<b-card v-for="(item, idx) in products" v-bind:key="idx" :title="item.title"
-          :img-src="item.images[0]"
-          img-top
-          tag="article"
-          class="mb-2">
-			<details>
-				<summary>More info</summary>
-				<p class="card-text" v-html="item.descriptionHtml"></p>
-			</details>
-    <b-button class="btn-info" variant="primary" @click="dropItem(item)">This is crap!</b-button>
-  </b-card>
-	</b-card-group>
-	<div class="row">
-		<b-button v-if="hasProducts" variant="primary" @click="doCheckout()">Proceed to checkout</b-button>
-		<div v-if="hasProducts" class="cart-summary">
-			<b-button variant="warn" @click="dropAllItems()">Everything is crap!</b-button>
+	<b-container class="mt-4 mb-4">
+		<div class="grid">
+			<b-card v-for="(item, idx) in products" v-bind:key="idx" :title="item.title"
+				:img-src="item.images[0]"
+				img-top
+				tag="article"
+				class="mb-2">
+				<details>
+					<summary>More info</summary>
+					<p class="card-text" v-html="item.descriptionHtml"></p>
+				</details>
+				<em slot="footer">
+					<b-button class="btn-info" variant="danger" @click="dropItem(item)">
+						<font-awesome-icon icon="trash"></font-awesome-icon> Remove
+					</b-button>
+				</em>
+			</b-card>
 		</div>
-		<div v-if="!hasProducts" class="cart-empty">
-			Your cart is empty
-		</div>
-	</div>
-	<div class="row">
-		<router-link to="/home" class="nav-link">
-			<b-button variant="warn">Continue Shopping!</b-button>
-		</router-link>
-	</div>
-</div>
+		<b-row align-h="center">
+			<div v-if="hasProducts" class="cart-summary">
+				<b-button variant="danger" @click="dropAllItems()">Remove All</b-button>&nbsp;
+			</div>
+			<b-button v-if="hasProducts" variant="primary" @click="doCheckout()">Proceed to checkout</b-button>
+			<div v-if="!hasProducts" class="cart-empty">
+				Your cart is empty
+			</div>
+		</b-row>
+	</b-container>
 </template>
 <script>
 	import { getItems, removeItem, clearAll, stream$ } from '../services/cart.js';
@@ -67,35 +66,15 @@
 </script>
 
 <style scoped>
-	.card {
-		background: linear-gradient(to bottom, #fff 0%, #888 100%);
-		border-radius: 20px;
-    border: 1px solid #ddd;
-    overflow: hidden;
-		max-width: 10rem;
-		flex: 1 0 auto;
-	}
 
-	.card:not(:last-of-type) {
-		margin-right: 0.5rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.card-img-top {
-		mix-blend-mode: multiply;
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+		grid-column-gap: 1em;
+		grid-row-gap: 1em;
 	}
 
 	.card-text {
 		font-size: 1rem;
-	}
-
-	.card-title {
-		overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    font-size: 1.17rem;
-    font-weight: bold;
 	}
 </style>

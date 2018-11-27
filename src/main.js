@@ -6,12 +6,13 @@ import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap/scss/bootstrap.scss';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faShoppingCart, faRing, faCartPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faRing, faCartPlus, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueSwing from 'vue-swing';
 library.add(faShoppingCart);
 library.add(faCartPlus);
 library.add(faRing);
+library.add(faTrash);
 library.add(faSpinner);
 
 // @ts-ignore
