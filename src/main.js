@@ -8,6 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import VueSwing from 'vue-swing'
 library.add(faShoppingCart);
 
 // @ts-ignore
@@ -18,11 +19,12 @@ import './styles/main.scss';
 import { getProducts, getProductById } from './services/shop';
 
 Vue.use(BootstrapVue);
+Vue.component('vue-swing', VueSwing)
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 (async () => {
-	const p = await getProductById('Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE4MTAwNDA1ODYzMzg=');
+	const p = await getProducts();
 	console.log(p);
 })();
 

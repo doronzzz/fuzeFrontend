@@ -2,10 +2,6 @@
 
 import { client } from './shopify-client';
 
-client.collection.fetchAll();
-
-
-
 /** @type ProductItem[] */
 let cache;
 
