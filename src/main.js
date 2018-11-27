@@ -17,6 +17,7 @@ import router from './router'
 import store from './store'
 import './styles/main.scss';
 import { getProducts, getProductById } from './services/shop';
+import { addItem, getItems } from './services/cart';
 
 Vue.use(BootstrapVue);
 Vue.component('vue-swing', VueSwing)
@@ -24,8 +25,13 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 (async () => {
+	const already = getItems();
+	if (already && already.length > 0) return;
 	const p = await getProducts();
-	console.log(p);
+	addItem(p[1]);
+	addItem(p[2]);
+	addItem(p[7]);
+	addItem(p[19]);
 })();
 
 // @ts-ignore
