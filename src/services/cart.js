@@ -59,6 +59,10 @@ export const getItems = () => {
  */
 export const addItem = (productItem) => {
   if (!productItem) return;
+  const hasItem = cart.items.find(item => item.id === productItem.id);
+  if (hasItem) {
+    return;
+  }
   cart.items.push(productItem);
   saveToCache();
 }

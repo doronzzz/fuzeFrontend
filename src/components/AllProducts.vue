@@ -26,6 +26,7 @@
                     bg-variant="light">
                 <!-- <p class="card-text" v-html="product.descriptionHtml"></p> -->
                 <em slot="footer">
+                    <b-button variant="secondary block btn-block" @click="addToCart(product)">Add To Cart</b-button>
                     <b-button variant="primary btn-primary btn-block" @click="goToProduct(product, $event)">Read More
                     </b-button>
                 </em>
@@ -39,6 +40,7 @@
 
 <script>
     import {getProducts} from "../services/shop";
+    import { addItem } from '../services/cart';
 
     export default {
         name: 'all-products',
@@ -61,6 +63,9 @@
                 console.log(newProducts);
                 this.products.push(...newProducts);
                 //this.$set(this.products, [this.products, ...newProducts], true)
+            },
+            addToCart (product) {
+                addItem(product);
             },
             goToProduct(product, ev) {
                 // change route to the product page.
