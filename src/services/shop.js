@@ -30,8 +30,8 @@ if (fromCache) {
 * @returns ProductItem
 */
 function sanitizeModel (graphModel) {
-  
-  // @ts-ignore
+
+  // @t`s-ignore
   const { id, descriptionHtml, title, vendor, tags, images } = graphModel;
   
   /** @type ProductItem */
@@ -56,7 +56,7 @@ function sanitizeModel (graphModel) {
 /**
  * 
  * @param {string} id 
- * @returns ProductItem
+ * @returns Promise<ProductItem>
  */
 export const getProductById = async (id) => {
   if (!id) {
