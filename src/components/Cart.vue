@@ -5,3 +5,9 @@
 		</p>
 	</div>
 </template>
+
+<script>
+	import { getItems } from '../services/cart.js';
+
+	
+</script>

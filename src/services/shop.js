@@ -60,7 +60,7 @@ function sanitizeModel (graphModel) {
 /**
  * 
  * @param {string} id 
- * @returns ProductItem
+ * @returns Promise<ProductItem>
  */
 export const getProductById = async (id) => {
   if (!id) {
@@ -89,7 +89,7 @@ export const getProducts = async () => {
     const raw = await client.product.fetchAll();
     /** @type ProductItem[] */
     const sanitized = raw.map(sanitizeModel);
-    localStorage.setItem('shopify-cache', JSON.stringify(graphModel => sanitizeModel(graphModel)));
+    localStorage.setItem('shopify-cache', JSON.stringify(sanitized));
     cache = sanitized;
   }
   return cache;
