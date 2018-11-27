@@ -40,7 +40,6 @@
 				return (this.items || []).slice();
 			},
 			hasProducts: function () {
-				return true;
 				return this.items && this.items.length > 0;
 			}
 		},

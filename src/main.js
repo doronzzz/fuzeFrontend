@@ -25,8 +25,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 (async () => {
-	const p = await getProducts();
-	console.log(p);
 	const already = getItems();
 	if (already && already.length > 0) return;
 	const p = await getProducts();
