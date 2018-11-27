@@ -12,6 +12,7 @@ import { client } from './shopify-client';
 * @property {string} vendor
 * @property {string[]} tags
 * @property {string[]} images
+* @property {string} price
 */
 
 
@@ -24,6 +25,7 @@ function sanitizeModel (graphModel) {
 
   // @t`s-ignore
   const { id, descriptionHtml, title, vendor, tags, images } = graphModel;
+  const price = parseFloat(graphModel.variants[0].price).toFixed(2);
   
   /** @type ProductItem */
   const productItem = {
@@ -32,6 +34,7 @@ function sanitizeModel (graphModel) {
     title,
     vendor,
     tags,
+    price,
     images: images.map( (img) => img.src)
   }
   return productItem;
@@ -72,10 +75,10 @@ export const getProductById = async (id) => {
 * @returns Promise<ProductItem[]>
 */
 export const getProducts = async (page = 0) => {
-  debugger;
   const cache = localStorage.getItem('shopify-cache-page-' + page);
   if (!cache) {
     const raw = await client.product.fetchAll(page);
+    debugger;
     /** @type ProductItem[] */
     const sanitized = raw.map(sanitizeModel);
     localStorage.setItem('shopify-cache-page-' + page, JSON.stringify(sanitized));
