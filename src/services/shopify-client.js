@@ -5,4 +5,4 @@ const client = Client.buildClient({
 	domain: domain,
 	storefrontAccessToken: token
 });
-export {client};
+export { client };
