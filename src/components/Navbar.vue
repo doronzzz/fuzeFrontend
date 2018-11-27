@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="md" variant="light">
+    <b-navbar toggleable="md" variant="light" sticky="true">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-navbar-brand class="our-logo"><router-link to="/"><img alt="Home" class="logo" src="../assets/logo.png">VueShop</router-link></b-navbar-brand>
         <b-collapse is-nav id="nav_collapse">
