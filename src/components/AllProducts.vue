@@ -3,15 +3,13 @@
         <h1 class="mt-3 mb-3">Our Must-Have Products!</h1>
         <div class="card-deck-item">
             <vue-swing v-bind:key="product.id" v-for="(product,index) in products" @throwout="throwout(index)" @throwin="throwin(index)" :config="config">
+                    <b-button variant="secondary block btn-block" @click="addToCart(product)">Add To Cart</b-button>
                     <b-card :title="product.title" class="box"
                                 :img-src="product.images[0]"
                                 :img-alt="product.title"
                                 img-top
                                 tag="article"
                                 style="max-width: 20rem;">
-                        <p class="card-text">
-                            <!-- {{product.description}} -->
-                        </p>
                         <b-button variant="primary block btn-block" @click="goToProduct(product, $event)">Read More</b-button>
                     </b-card>
             </vue-swing>
@@ -24,6 +22,7 @@
                     tag="article"
                     bg-variant="light">
                 <!-- <p class="card-text" v-html="product.descriptionHtml"></p> -->
+                <b-button variant="secondary block btn-block" @click="addToCart(product)">Add To Cart</b-button>
                 <b-button variant="primary btn-primary btn-block" @click="goToProduct(product, $event)">Read More</b-button>
             </b-card>
         </div>
@@ -35,6 +34,7 @@
 
 <script>
     import {getProducts} from "../services/shop";
+    import { addItem } from '../services/cart';
 
     export default {
         name: 'all-products',
@@ -57,6 +57,9 @@
                 console.log(newProducts);
                 this.products.push(...newProducts);
                 //this.$set(this.products, [this.products, ...newProducts], true)
+            },
+            addToCart (product) {
+                addItem(product);
             },
             goToProduct(product, ev) {
                 // change route to the product page.
