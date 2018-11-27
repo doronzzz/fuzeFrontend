@@ -2,6 +2,10 @@
 
 // @ts-ignore
 import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 // @ts-ignore
 import App from './App.vue'
 import router from './router'
@@ -9,12 +13,12 @@ import store from './store'
 import './styles/main.scss';
 import { getProducts, getProductById } from './services/shop';
 
+Vue.use(BootstrapVue);
+Vue.config.productionTip = false;
 (async () => {
 	const p = await getProductById('Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE4MTAwNDA1ODYzMzg=');
 	console.log(p);
 })();
-
-Vue.config.productionTip = false
 
 // @ts-ignore
 new Vue({
