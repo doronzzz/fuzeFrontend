@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<router-link to="/home" class="nav-link">
+		<router-link to="/" class="nav-link">
 			<b-button variant="warn">Continue Shopping!</b-button>
 		</router-link>
 	</div>
