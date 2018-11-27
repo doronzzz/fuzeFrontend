@@ -4,10 +4,10 @@
 		<h1 class="h3">{{ product.title }}</h1>
 		<b-row class="mt-3">
 			<b-col md="5">
-				<img v-bind:src="product.images[0]" class="product__image">
+				<img v-bind:src="selectedImage" class="product__image">
 				<b-row class="product__images mt-2">
 					<b-col md="6" lg="4" v-for="image in product.images">
-						<img v-bind:src="image" class="product__images__image" />
+						<img v-bind:src="image" class="product__images__image" @click="selectImage(image)" />
 					</b-col>
 				</b-row>
 			</b-col>
@@ -34,6 +34,7 @@
     export default {
 		data() {
 		    return {
+		        selectedImage: null,
 				product: {
 				    images: [],
 					description: null
@@ -46,10 +47,13 @@
     	methods: {
 		    async loadProduct(productID) {
                 this.product = await getProductById(productID);
-                console.log(this.product);
+                this.selectImage(this.product.images[0]);
 			},
 			addToCart() {
                 addItem(this.product);
+			},
+            selectImage(image) {
+		        this.selectedImage = image;
 			}
 		}
     };
@@ -82,6 +86,7 @@
 	.product__images__image {
 		@extend .product__image;
 		margin-top: 10px;
+		cursor: pointer;
 	}
 
 </style>

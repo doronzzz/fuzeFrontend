@@ -72,7 +72,6 @@ export const getProductById = async (id) => {
 * @returns Promise<ProductItem[]>
 */
 export const getProducts = async (page = 0) => {
-  debugger;
   const cache = localStorage.getItem('shopify-cache-page-' + page);
   if (!cache) {
     const raw = await client.product.fetchAll(page);
