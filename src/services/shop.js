@@ -2,10 +2,6 @@
 
 import { client } from './shopify-client';
 
-client.collection.fetchAll();
-
-
-
 /** @type ProductItem[] */
 let cache;
 
@@ -34,7 +30,6 @@ if (fromCache) {
 * @returns ProductItem
 */
 function sanitizeModel (graphModel) {
-  debugger;
   
   // @ts-ignore
   const { id, descriptionHtml, title, vendor, tags, images } = graphModel;
@@ -90,7 +85,7 @@ export const getProducts = async () => {
     const raw = await client.product.fetchAll();
     /** @type ProductItem[] */
     const sanitized = raw.map(sanitizeModel);
-    localStorage.setItem('shopify-cache', JSON.stringify(graphModel => sanitizeModel(graphModel)));
+    localStorage.setItem('shopify-cache', JSON.stringify(sanitized));
     cache = sanitized;
   }
   return cache;

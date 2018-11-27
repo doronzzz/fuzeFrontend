@@ -16,7 +16,7 @@ import { getProducts, getProductById } from './services/shop';
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 (async () => {
-	const p = await getProductById('Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE4MTAwNDA1ODYzMzg=');
+	const p = await getProducts();
 	console.log(p);
 })();
 

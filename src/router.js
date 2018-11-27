@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Collections from './components/Collection.vue'
+import CardDeck from './components/CardDeck.vue'
 import Product from './components/Product.vue'
 import Cart from './components/Cart.vue'
 
@@ -19,7 +20,7 @@ export default new Router({
     {
       path: '/collection',
       name: 'collection',
-      component: Collections
+      component: CardDeck
     },
     {
       path: '/product/:id',
