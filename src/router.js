@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Collections from './components/Collection.vue'
 import CardDeck from './components/CardDeck.vue'
 import AllProducts from './components/AllProducts.vue'
 import Product from './components/Product.vue'
@@ -19,15 +18,14 @@ export default new Router({
       component: Home
     },
     {
-<<<<<<< HEAD
-      path: '/collection',
-      name: 'collection',
-      component: CardDeck
-=======
       path: '/all-products',
       name: 'All Products',
       component: AllProducts
->>>>>>> c746fa9c4c776a82252818dc17cd2909abea93a8
+    },
+    {
+      path: '/collection',
+      name: 'collection',
+      component: CardDeck
     },
     {
       path: '/product/:id',
