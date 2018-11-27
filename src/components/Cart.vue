@@ -15,15 +15,22 @@
 	</b-card-group>
 	<div class="row">
 		<b-button v-if="hasProducts" variant="primary" @click="doCheckout()">Proceed to checkout</b-button>
+		<div v-if="hasProducts" class="cart-summary">
+			<b-button variant="warn" @click="dropAllItems()">Everything is crap!</b-button>
+		</div>
+		<div v-if="!hasProducts" class="cart-empty">
+			Your cart is empty
+		</div>
+	</div>
+	<div class="row">
 		<router-link to="/home" class="nav-link">
-			<b-button v-if="hasProducts" variant="warn">Continue Shopping!</b-button>
+			<b-button variant="warn">Continue Shopping!</b-button>
 		</router-link>
-		<b-button v-if="hasProducts" variant="warn" @click="dropAllItems">Everything is crap!</b-button>
 	</div>
 </div>
 </template>
 <script>
-	import { getItems, removeItem } from '../services/cart.js';
+	import { getItems, removeItem, clearAll, stream$ } from '../services/cart.js';
 
 	export default {
 		name: 'Cart',
@@ -34,6 +41,10 @@
 		},
 		mounted: function () {
 			this.items = getItems();
+			this.unsub = stream$.subscribe((items) => this.items = items).unsubscribe;
+		},
+		destroyed: function () {
+			this.unsub();
 		},
 		computed: {
 			products: function () {
@@ -44,9 +55,11 @@
 			}
 		},
 		methods: {
-			dropItem: async function (item) {
+			dropItem: function (item) {
 				removeItem(item);
-				this.items = getItems();
+			},
+			dropAllItems: function () {
+				clearAll();
 			}
 		}
 

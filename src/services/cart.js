@@ -1,3 +1,5 @@
+import { Subject } from 'rxjs';
+
 // @ts-check
 
 /**
@@ -38,7 +40,15 @@ function loadFromCache () {
 
 function saveToCache () {
   localStorage.setItem('shopify-cart', JSON.stringify(cart));
+  stream$.next(cart.items);
 }
+
+
+
+
+
+
+export const stream$ = new Subject();
 
 /**
  * @return ProductItem[]

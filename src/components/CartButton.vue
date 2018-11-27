@@ -1,15 +1,27 @@
 <template>
 	<div class="shopping-cart">
 		<font-awesome-icon icon="shopping-cart" />
-		<div class="shopping-cart__badge">2</div>
+		<div class="shopping-cart__badge">{{count}}</div>
 	</div>
 </template>
 
 <script>
+
+	import { getItems, stream$ } from '../services/cart.js';
+
     export default {
         data: function () {
-            return {};
-        }
+            return {
+				count: 0
+			};
+		},
+		mounted: function () {
+			this.unsub = stream$.subscribe(items => this.count = items.length).unsubscribe;
+			this.count = getItems().length;
+		},
+		destroyed: function () {
+			this.unsub();
+		}
     }
 </script>
 

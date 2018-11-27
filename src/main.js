@@ -8,7 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import VueSwing from 'vue-swing'
+import VueSwing from 'vue-swing';
 library.add(faShoppingCart);
 
 // @ts-ignore
