@@ -31,7 +31,7 @@
                 </em>
             </b-card>
         </div>
-        <b-button @click="loadMore(page)" class="mt-5" variant="primary btn-block block">
+        <b-button @click="loadMore(page)" class="mt-5 btn-block" variant="info">
             Load More
         </b-button>
     </div>
