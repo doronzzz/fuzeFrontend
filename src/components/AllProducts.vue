@@ -31,6 +31,9 @@
                 </em>
             </b-card>
         </div>
+        <b-button @click="loadMore(page)" class="mt-5" variant="primary btn-block block">
+            Load More
+        </b-button>
     </div>
 </template>
 
@@ -42,15 +45,23 @@
         data: function () {
             return {
                 products: [],
+                page:1,
                 config: {},
             }
         },
         mounted: async function () {
             // load all products, async'ly
-            this.products = await getProducts();
+            this.products = await getProducts(this.page);
             console.log(this.products);
         },
         methods: {
+            async loadMore(){
+                this.page = this.page+1;
+                let newProducts = await getProducts(this.page);
+                console.log(newProducts);
+                this.products.push(...newProducts);
+                //this.$set(this.products, [this.products, ...newProducts], true)
+            },
             goToProduct(product, ev) {
                 // change route to the product page.
                 this.$router.push({name: 'ProductPage', params: {id: product.id}})
