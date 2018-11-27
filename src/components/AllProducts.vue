@@ -30,6 +30,7 @@
         mounted: async function () {
             // load all products, async'ly
             this.products = await getProducts();
+            console.log(this.products);
         },
         methods: {
             goToProduct(product, ev) {
