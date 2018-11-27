@@ -45,9 +45,11 @@
     .card-deck-item {
         position: relative;
         display: block;
-        margin: 0px auto;
-        width: 350px;
-        height: 450px;
+        width: 100vw;
+        height: calc( 100vh - 65px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .card-deck-item > div {
