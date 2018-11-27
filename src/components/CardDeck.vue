@@ -10,7 +10,7 @@
                     <p class="card-text">
                         <!-- {{product.description}} -->
                     </p>
-                    <b-button v-bind:href="'/product/' + product.id" variant="primary">Go somewhere</b-button>
+                    <b-button variant="primary block btn-block" @click="goToProduct(product, $event)">Read More</b-button>
                 </b-card>
         </vue-swing>
     </div>
@@ -30,6 +30,10 @@
             }
         },
         methods:{
+            goToProduct(product, ev) {
+                // change route to the product page.
+                this.$router.push({name: 'ProductPage', params: {id: product.id}})
+            },
             throwout:function(index){
                 console.log(index)
                 this.products.splice(index,1); // why is this removing only the last row?

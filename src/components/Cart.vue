@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-<b-card-group deck>
+<b-card-group deck v-if="hasProducts">
 	<b-card v-for="(item, idx) in products" v-bind:key="idx" :title="item.title"
           :img-src="item.images[0]"
           img-top
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<router-link to="/home" class="nav-link">
+		<router-link to="/" class="nav-link">
 			<b-button variant="warn">Continue Shopping!</b-button>
 		</router-link>
 	</div>
