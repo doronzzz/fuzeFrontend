@@ -1,8 +1,8 @@
 import Client from 'shopify-buy';
-import { creds } from '../conf';
+import { domain, token } from '../conf';
 
 const client = Client.buildClient({
-	domain: creds.domain,
-	storefrontAccessToken: creds.token
+	domain: domain,
+	storefrontAccessToken: token
 });
 export {client};
