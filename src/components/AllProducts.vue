@@ -1,19 +1,17 @@
 <template>
-    <div class="all-products">
+    <div class="all-products container">
         <h1>Our Must-Have Products!</h1>
-        <b-card-group deck class="m-3">
+        <div class="grid">
             <b-card v-for="product in products" :key="product.id" :title="product.title"
                     :img-src="product.images[0]"
                     :img-alt="product.title"
                     img-top
                     tag="article"
-                    style="min-width: 25rem;"
-                    class="mb-2"
                     bg-variant="light">
-                <p class="card-text" v-html="product.descriptionHtml"></p>
-                <b-button variant="primary" @click="goToProduct(product, $event)">More</b-button>
+                <!-- <p class="card-text" v-html="product.descriptionHtml"></p> -->
+                <b-button variant="block btn-block primary" @click="goToProduct(product, $event)">Read More</b-button>
             </b-card>
-        </b-card-group>
+        </div>
     </div>
 </template>
 
@@ -39,3 +37,12 @@
         }
     }
 </script>
+
+<style scooped>
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+}
+</style>
