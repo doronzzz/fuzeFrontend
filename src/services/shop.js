@@ -60,7 +60,7 @@ function sanitizeModel (graphModel) {
 /**
  * 
  * @param {string} id 
- * @returns ProductItem
+ * @returns Promise<ProductItem>
  */
 export const getProductById = async (id) => {
   if (!id) {

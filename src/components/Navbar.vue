@@ -8,30 +8,48 @@
 		<b-collapse is-nav id="nav_collapse">
 
 			<b-navbar-nav>
-				<b-nav-item><router-link to="/home" class="nav-link">Home</router-link></b-nav-item>
-				<b-nav-item><router-link to="/all-products" class="nav-link">All Products</router-link></b-nav-item>
-				<b-nav-item><router-link to="/product" class="nav-link">Product</router-link></b-nav-item>
-				<b-nav-item><router-link to="/cart" class="nav-link">Cart</router-link></b-nav-item>
-				<b-nav-item><router-link to="/help" class="nav-link">Help</router-link></b-nav-item>
+				<b-nav-item>
+					<router-link to="/home" class="nav-link">Home</router-link>
+				</b-nav-item>
+				<b-nav-item>
+					<router-link to="/collection" class="nav-link">Collection</router-link>
+				</b-nav-item>
+				<b-nav-item>
+					<router-link to="/all-products" class="nav-link">All Products</router-link>
+				</b-nav-item>
+				<b-nav-item>
+					<router-link to="/help" class="nav-link">Help</router-link>
+				</b-nav-item>
 			</b-navbar-nav>
 
 			<!-- Right aligned nav items -->
 			<b-navbar-nav class="ml-auto">
-
+				<b-nav-item>
+					<router-link to="/cart" class="nav-link">
+						<cart-button></cart-button>
+					</router-link>
+				</b-nav-item>
 			</b-navbar-nav>
 
 		</b-collapse>
 	</b-navbar>
 </template>
+<script>
+	import CartButton from './CartButton';
+	export default {
+	    components: {
+            CartButton
+		}
+	}
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 	.navbar {
-		padding-bottom: 10px;
 		border-bottom: 1px solid #eee;
 
 		.logo {
-			width: 64px;
+			width: 58px;
 			padding: 0 10px;
 			vertical-align: middle;
 		}
