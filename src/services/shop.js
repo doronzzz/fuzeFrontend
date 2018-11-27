@@ -78,7 +78,6 @@ export const getProducts = async (page = 0) => {
   const cache = localStorage.getItem('shopify-cache-page-' + page);
   if (!cache) {
     const raw = await client.product.fetchAll(page);
-    debugger;
     /** @type ProductItem[] */
     const sanitized = raw.map(sanitizeModel);
     localStorage.setItem('shopify-cache-page-' + page, JSON.stringify(sanitized));
