@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Collections from './components/Collection.vue'
+import AllProducts from './components/AllProducts.vue'
 import Product from './components/Product.vue'
 import Cart from './components/Cart.vue'
 
@@ -17,9 +17,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/collection',
-      name: 'collection',
-      component: Collections
+      path: '/all-products',
+      name: 'All Products',
+      component: AllProducts
     },
     {
       path: '/product/:id',

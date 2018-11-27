@@ -34,9 +34,8 @@ if (fromCache) {
 * @returns ProductItem
 */
 function sanitizeModel (graphModel) {
-  debugger;
-  
-  // @ts-ignore
+
+  // @t`s-ignore
   const { id, descriptionHtml, title, vendor, tags, images } = graphModel;
   
   /** @type ProductItem */
