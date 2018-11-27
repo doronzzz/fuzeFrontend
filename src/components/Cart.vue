@@ -5,9 +5,8 @@
 		</p>
 	</div>
 </template>
-
 <script>
-	import { getItems } from '../services/cart.js';
+	export default {
 
-	
+	};
 </script>
