@@ -32,10 +32,6 @@ Vue.config.productionTip = false;
 	const already = getItems();
 	if (already && already.length > 0) return;
 	const p = await getProducts();
-	addItem(p[1]);
-	addItem(p[2]);
-	addItem(p[7]);
-	addItem(p[19]);
 })();
 
 // @ts-ignore
