@@ -2,15 +2,6 @@
 
 import { client } from './shopify-client';
 
-/** @type ProductItem[] */
-let cache;
-
-const fromCache = localStorage.getItem('shopify-cache');
-
-if (fromCache) {
-  cache = JSON.parse(fromCache);
-}
-
 
 /**
 * @typedef ProductItem
@@ -80,15 +71,17 @@ export const getProductById = async (id) => {
 /**
 * @returns Promise<ProductItem[]>
 */
-export const getProducts = async () => {
+export const getProducts = async (page = 0) => {
+  debugger;
+  const cache = localStorage.getItem('shopify-cache-page-' + page);
   if (!cache) {
-    const raw = await client.product.fetchAll();
+    const raw = await client.product.fetchAll(page);
     /** @type ProductItem[] */
     const sanitized = raw.map(sanitizeModel);
-    localStorage.setItem('shopify-cache', JSON.stringify(sanitized));
-    cache = sanitized;
+    localStorage.setItem('shopify-cache-page-' + page, JSON.stringify(sanitized));
+    return sanitized;
   }
-  return cache;
+  return JSON.parse(cache);
 }
 
 

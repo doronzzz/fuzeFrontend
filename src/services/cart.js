@@ -24,6 +24,8 @@ const cart = {
   items: []
 };
 
+export const stream$ = new Subject();
+
 loadFromCache();
 
 function loadFromCache () {
@@ -45,11 +47,6 @@ function saveToCache () {
 
 
 
-
-
-
-export const stream$ = new Subject();
-
 /**
  * @return ProductItem[]
  */
@@ -61,6 +58,7 @@ export const getItems = () => {
  * @param {ProductItem} productItem 
  */
 export const addItem = (productItem) => {
+  if (!productItem) return;
   cart.items.push(productItem);
   saveToCache();
 }
