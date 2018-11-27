@@ -3,22 +3,23 @@
 // @ts-ignore
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/scss/bootstrap.scss';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faShoppingCart, faRing, faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faRing, faCartPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueSwing from 'vue-swing';
 library.add(faShoppingCart);
 library.add(faCartPlus);
 library.add(faRing);
+library.add(faSpinner);
 
 // @ts-ignore
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import './styles/main.scss';
-import { getProducts, getProductById } from './services/shop';
+import { getProducts } from './services/shop';
 import { addItem, getItems } from './services/cart';
 
 Vue.use(BootstrapVue);
