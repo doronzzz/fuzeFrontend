@@ -1,10 +1,7 @@
 <template>
 	<div id="app">
 		<Navbar/>
-		<router-view/>
-		<button role="button" class="btn btn-primary">
-			lol
-		</button>
+		<router-view />
 	</div>
 </template>
 <script>
