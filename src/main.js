@@ -25,10 +25,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 (async () => {
-<<<<<<< HEAD
 	const p = await getProducts();
 	console.log(p);
-=======
 	const already = getItems();
 	if (already && already.length > 0) return;
 	const p = await getProducts();
@@ -36,7 +34,6 @@ Vue.config.productionTip = false;
 	addItem(p[2]);
 	addItem(p[7]);
 	addItem(p[19]);
->>>>>>> cart
 })();
 
 // @ts-ignore
