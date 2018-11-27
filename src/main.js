@@ -16,14 +16,20 @@ import router from './router'
 import store from './store'
 import './styles/main.scss';
 import { getProducts, getProductById } from './services/shop';
+import { addItem, getItems } from './services/cart';
 
 Vue.use(BootstrapVue);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 (async () => {
-	const p = await getProductById('Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE4MTAwNDA1ODYzMzg=');
-	console.log(p);
+	const already = getItems();
+	if (already && already.length > 0) return;
+	const p = await getProducts();
+	addItem(p[1]);
+	addItem(p[2]);
+	addItem(p[7]);
+	addItem(p[19]);
 })();
 
 // @ts-ignore
