@@ -3,7 +3,7 @@
 // @ts-ignore
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/scss/bootstrap.scss';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShoppingCart, faRing, faCartPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
