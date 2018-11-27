@@ -1,7 +1,7 @@
 <template>
     <b-navbar toggleable="md" variant="light">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-        <b-navbar-brand><router-link to="/"><img alt="Home" class="logo" src="../assets/logo.png">VueShop</router-link></b-navbar-brand>
+        <b-navbar-brand class="our-logo"><router-link to="/"><img alt="Home" class="logo" src="../assets/logo.png">VueShop</router-link></b-navbar-brand>
         <b-collapse is-nav id="nav_collapse">
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
@@ -41,6 +41,10 @@
             &.router-link-exact-active, &.active {
                 color: #fe885f;
             }
+        }
+
+        .our-logo .router-link-active {
+            text-decoration: none;
         }
     }
 </style>
