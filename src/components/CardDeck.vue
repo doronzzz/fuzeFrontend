@@ -1,6 +1,6 @@
 <template>
     <div class="card-deck-item">
-        <vue-swing v-bind:key="product.id" v-for="(product,index) in products" @throwout="throwout(index)" @throwin="throwin(index)" :config="config">
+        <vue-swing v-bind:key="product.id" v-for="(product,index) in products" @throwout="throwout(index, $event)" @throwin="throwin(index,$event)" :config="config">
                   <b-card :title="product.title" class="box"
                             :img-src="product.images[0]"
                             :img-alt="product.title"
