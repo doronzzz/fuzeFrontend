@@ -1,15 +1,18 @@
 <template>
 <div class="container">
-    <h1 class="mt-3 mb-3">Your Cart</h1>
-    <div class="grid">
-        	<b-card v-for="(item, idx) in products" v-bind:key="idx" :title="item.title"
-            :img-src="item.images[0]"
-            img-top
-            tag="article"
-            class="mb-2">
-            <b-button class="btn-info" variant="primary btn-block block" @click="dropItem(item)">Remove Item</b-button>
-        </b-card>
-    </div>
+<b-card-group deck>
+	<b-card v-for="(item, idx) in products" v-bind:key="idx" :title="item.title"
+          :img-src="item.images[0]"
+          img-top
+          tag="article"
+          class="mb-2">
+			<details>
+				<summary>More info</summary>
+				<p class="card-text" v-html="item.descriptionHtml"></p>
+			</details>
+    <b-button class="btn-info" variant="primary" @click="dropItem(item)">This is crap!</b-button>
+  </b-card>
+	</b-card-group>
 	<div class="row">
 		<b-button v-if="hasProducts" variant="primary" @click="doCheckout()">Proceed to checkout</b-button>
 		<div v-if="hasProducts" class="cart-summary">
@@ -20,7 +23,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<router-link to="/" class="nav-link">
+		<router-link to="/home" class="nav-link">
 			<b-button variant="warn">Continue Shopping!</b-button>
 		</router-link>
 	</div>
@@ -64,13 +67,35 @@
 </script>
 
 <style scoped>
-	
+	.card {
+		background: linear-gradient(to bottom, #fff 0%, #888 100%);
+		border-radius: 20px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+		max-width: 10rem;
+		flex: 1 0 auto;
+	}
 
-.grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    grid-column-gap: 1em;
-    grid-row-gap: 1em;
-}
+	.card:not(:last-of-type) {
+		margin-right: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
 
+	.card-img-top {
+		mix-blend-mode: multiply;
+	}
+
+	.card-text {
+		font-size: 1rem;
+	}
+
+	.card-title {
+		overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 1.17rem;
+    font-weight: bold;
+	}
 </style>
