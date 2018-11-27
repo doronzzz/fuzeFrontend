@@ -19,7 +19,7 @@ export default new Router({
     },
     {
       path: '/all-products',
-      name: 'All Products',
+      name: 'AllProducts',
       component: AllProducts
     },
     {
@@ -29,12 +29,12 @@ export default new Router({
     },
     {
       path: '/product/:id',
-      name: 'Product Page',
+      name: 'ProductPage',
       component: Product
     },
     {
       path: '/cart',
-      name: 'Cart Page',
+      name: 'CartPage',
       component: Cart
     },
     {
