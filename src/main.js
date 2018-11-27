@@ -2,15 +2,23 @@
 
 // @ts-ignore
 import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 // @ts-ignore
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import './styles/main.scss';
-import { getProducts } from './services/shop';
+import { getProducts, getProductById } from './services/shop';
 
-
-Vue.config.productionTip = false
+Vue.use(BootstrapVue);
+Vue.config.productionTip = false;
+(async () => {
+	const p = await getProductById('Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzE4MTAwNDA1ODYzMzg=');
+	console.log(p);
+})();
 
 // @ts-ignore
 new Vue({

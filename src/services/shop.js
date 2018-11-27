@@ -4,6 +4,8 @@ import { client } from './shopify-client';
 
 client.collection.fetchAll();
 
+
+
 /** @type ProductItem[] */
 let cache;
 
@@ -15,43 +17,80 @@ if (fromCache) {
 
 
 /**
- * @typedef ProductItem
- * 
- * @property {string|number} id
- * @property {string} title
- * @property {string} descriptionHtml
- * @property {string} vendor
- * @property {string[]} tags
- * @property {string[]} images
- */
+* @typedef ProductItem
+* 
+* @property {string|number} id
+* @property {string} title
+* @property {string} descriptionHtml
+* @property {string} vendor
+* @property {string[]} tags
+* @property {string[]} images
+*/
 
 
-const x = 1;
 
 /**
- * @returns Promise<ProductItem[]>
+* @param {object} graphModel 
+* @returns ProductItem
+*/
+function sanitizeModel (graphModel) {
+  debugger;
+  
+  // @ts-ignore
+  const { id, descriptionHtml, title, vendor, tags, images } = graphModel;
+  
+  /** @type ProductItem */
+  const productItem = {
+    id,
+    descriptionHtml,
+    title,
+    vendor,
+    tags,
+    images: images.map( (img) => img.src)
+  }
+  return productItem;
+}
+
+
+
+
+
+
+
+
+/**
+ * 
+ * @param {string} id 
+ * @returns ProductItem
  */
+export const getProductById = async (id) => {
+  if (!id) {
+    throw new Error('Id not provided');
+  }
+  const fromCache = localStorage.getItem('shopify-product-' + id);
+  if (!fromCache) {
+    const graphModel = await client.product.fetch(id);
+    const sanitized = sanitizeModel(graphModel);
+    localStorage.setItem('shopify-product-' + id, JSON.stringify(sanitized));
+    return sanitized;
+  } else {
+    return JSON.parse(fromCache);
+  }
+};
+
+
+
+
+
+/**
+* @returns Promise<ProductItem[]>
+*/
 export const getProducts = async () => {
   if (!cache) {
     const raw = await client.product.fetchAll();
     /** @type ProductItem[] */
-    const sanitized = raw.map(/** @type any */ (graphModel) => {
-
-      // @ts-ignore
-      const { id, descriptionHtml, title, vendor, tags, images } = graphModel;
-
-      /** @type ProductItem */
-      const productItem = {
-        id,
-        descriptionHtml,
-        title,
-        vendor,
-        tags,
-        images: images.map( (img) => img.src)
-      }
-      return productItem;
-    });
-    localStorage.setItem('shopify-cache', JSON.stringify(sanitized));
+    const sanitized = raw.map(sanitizeModel);
+    localStorage.setItem('shopify-cache', JSON.stringify(graphModel => sanitizeModel(graphModel)));
     cache = sanitized;
   }
   return cache;
@@ -73,142 +112,142 @@ const sample = {
   "publishedAt": "2018-11-04T11:51:05Z",
   "onlineStoreUrl": null,
   "options": [
-      {
-          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzI0NDM0MDg4MDE4OTA=",
-          "name": "Title",
-          "values": [
-              {
-                  "value": "Default Title",
-                  "type": {
-                      "name": "String",
-                      "kind": "SCALAR"
-                  }
-              }
-          ],
+    {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzI0NDM0MDg4MDE4OTA=",
+      "name": "Title",
+      "values": [
+        {
+          "value": "Default Title",
           "type": {
-              "name": "ProductOption",
-              "kind": "OBJECT",
-              "fieldBaseTypes": {
-                  "name": "String",
-                  "values": "String"
-              },
-              "implementsNode": true
+            "name": "String",
+            "kind": "SCALAR"
           }
+        }
+      ],
+      "type": {
+        "name": "ProductOption",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "name": "String",
+          "values": "String"
+        },
+        "implementsNode": true
       }
+    }
   ],
   "images": [
-      {
-          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvNTk2MzQ5MDQ1OTc0Ng==",
-          "src": "https://cdn.shopify.com/s/files/1/0049/5186/7490/products/product-image-783880089.jpg?v=1541239815",
-          "altText": null,
-          "type": {
-              "name": "Image",
-              "kind": "OBJECT",
-              "fieldBaseTypes": {
-                  "altText": "String",
-                  "id": "ID",
-                  "src": "URL"
-              },
-              "implementsNode": false
-          },
-          "hasNextPage": false,
-          "hasPreviousPage": false,
-          "variableValues": {
-              "first": 20
-          }
+    {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvNTk2MzQ5MDQ1OTc0Ng==",
+      "src": "https://cdn.shopify.com/s/files/1/0049/5186/7490/products/product-image-783880089.jpg?v=1541239815",
+      "altText": null,
+      "type": {
+        "name": "Image",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "altText": "String",
+          "id": "ID",
+          "src": "URL"
+        },
+        "implementsNode": false
+      },
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "variableValues": {
+        "first": 20
       }
+    }
   ],
   "variants": [
-      {
-          "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8xNjk5ODY1NTk1MDk0Ng==",
-          "title": "Default Title",
-          "price": "30.92",
-          "weight": 0,
-          "available": true,
-          "sku": "409142",
-          "compareAtPrice": "30.92",
-          "image": {
-              "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvNTk2MzQ5MDQ1OTc0Ng==",
-              "src": "https://cdn.shopify.com/s/files/1/0049/5186/7490/products/product-image-783880089.jpg?v=1541239815",
-              "altText": null,
-              "type": {
-                  "name": "Image",
-                  "kind": "OBJECT",
-                  "fieldBaseTypes": {
-                      "altText": "String",
-                      "id": "ID",
-                      "src": "URL"
-                  },
-                  "implementsNode": false
-              }
+    {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8xNjk5ODY1NTk1MDk0Ng==",
+      "title": "Default Title",
+      "price": "30.92",
+      "weight": 0,
+      "available": true,
+      "sku": "409142",
+      "compareAtPrice": "30.92",
+      "image": {
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvNTk2MzQ5MDQ1OTc0Ng==",
+        "src": "https://cdn.shopify.com/s/files/1/0049/5186/7490/products/product-image-783880089.jpg?v=1541239815",
+        "altText": null,
+        "type": {
+          "name": "Image",
+          "kind": "OBJECT",
+          "fieldBaseTypes": {
+            "altText": "String",
+            "id": "ID",
+            "src": "URL"
           },
-          "selectedOptions": [
-              {
-                  "name": "Title",
-                  "value": "Default Title",
-                  "type": {
-                      "name": "SelectedOption",
-                      "kind": "OBJECT",
-                      "fieldBaseTypes": {
-                          "name": "String",
-                          "value": "String"
-                      },
-                      "implementsNode": false
-                  }
-              }
-          ],
+          "implementsNode": false
+        }
+      },
+      "selectedOptions": [
+        {
+          "name": "Title",
+          "value": "Default Title",
           "type": {
-              "name": "ProductVariant",
-              "kind": "OBJECT",
-              "fieldBaseTypes": {
-                  "available": "Boolean",
-                  "compareAtPrice": "Money",
-                  "id": "ID",
-                  "image": "Image",
-                  "price": "Money",
-                  "product": "Product",
-                  "selectedOptions": "SelectedOption",
-                  "sku": "String",
-                  "title": "String",
-                  "weight": "Float"
-              },
-              "implementsNode": true
-          },
-          "hasNextPage": false,
-          "hasPreviousPage": false,
-          "variableValues": {
-              "first": 20
+            "name": "SelectedOption",
+            "kind": "OBJECT",
+            "fieldBaseTypes": {
+              "name": "String",
+              "value": "String"
+            },
+            "implementsNode": false
           }
+        }
+      ],
+      "type": {
+        "name": "ProductVariant",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "available": "Boolean",
+          "compareAtPrice": "Money",
+          "id": "ID",
+          "image": "Image",
+          "price": "Money",
+          "product": "Product",
+          "selectedOptions": "SelectedOption",
+          "sku": "String",
+          "title": "String",
+          "weight": "Float"
+        },
+        "implementsNode": true
+      },
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "variableValues": {
+        "first": 20
       }
+    }
   ],
   "type": {
-      "name": "Product",
-      "kind": "OBJECT",
-      "fieldBaseTypes": {
-          "createdAt": "DateTime",
-          "description": "String",
-          "descriptionHtml": "HTML",
-          "handle": "String",
-          "id": "ID",
-          "images": "ImageConnection",
-          "onlineStoreUrl": "URL",
-          "options": "ProductOption",
-          "productType": "String",
-          "publishedAt": "DateTime",
-          "tags": "String",
-          "title": "String",
-          "updatedAt": "DateTime",
-          "variants": "ProductVariantConnection",
-          "vendor": "String"
-      },
-      "implementsNode": true
+    "name": "Product",
+    "kind": "OBJECT",
+    "fieldBaseTypes": {
+      "createdAt": "DateTime",
+      "description": "String",
+      "descriptionHtml": "HTML",
+      "handle": "String",
+      "id": "ID",
+      "images": "ImageConnection",
+      "onlineStoreUrl": "URL",
+      "options": "ProductOption",
+      "productType": "String",
+      "publishedAt": "DateTime",
+      "tags": "String",
+      "title": "String",
+      "updatedAt": "DateTime",
+      "variants": "ProductVariantConnection",
+      "vendor": "String"
+    },
+    "implementsNode": true
   },
   "hasNextPage": {
-      "value": true
+    "value": true
   },
   "hasPreviousPage": false,
   "variableValues": {
-      "first": 20
+    "first": 20
   }
 }
 */
