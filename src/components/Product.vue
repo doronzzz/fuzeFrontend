@@ -2,7 +2,7 @@
 	<b-container v-if="! product.vendor">
 		<b-row align-h="center" class="mt-4 mb-4"><font-awesome-icon icon="spinner" /></b-row>
 	</b-container>
-	<b-container class="mt-4 mb-4" v-else>
+	<b-container class="bgbg mt-4 mb-4" v-else>
 		<h1 class="h3">{{ product.title }}</h1>
 		<b-row class="mt-3">
 			<b-button variant="secondary block btn-block" @click="addToCart(product)"><font-awesome-icon icon="cart-plus" /> Add To Cart</b-button>
@@ -167,6 +167,10 @@
 
 	.product__price {
 		padding: 6px;
+	}
+
+	.bgbg {
+		background: rgba(255, 255, 255, 0.7);
 	}
 
 </style>
