@@ -9,7 +9,7 @@
 
 			<b-navbar-nav>
 				<b-nav-item><router-link to="/home" class="nav-link">Home</router-link></b-nav-item>
-				<b-nav-item><router-link to="/collection" class="nav-link">Collection</router-link></b-nav-item>
+				<b-nav-item><router-link to="/all-products" class="nav-link">All Products</router-link></b-nav-item>
 				<b-nav-item><router-link to="/product" class="nav-link">Product</router-link></b-nav-item>
 				<b-nav-item><router-link to="/cart" class="nav-link">Cart</router-link></b-nav-item>
 				<b-nav-item><router-link to="/help" class="nav-link">Help</router-link></b-nav-item>
