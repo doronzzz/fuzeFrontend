@@ -38,16 +38,11 @@
     }
 </script>
 
-<<<<<<< HEAD
-<style scooped>
+<style scoped>
 .grid{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     grid-column-gap: 1em;
     grid-row-gap: 1em;
 }
-=======
-<style scoped>
-
->>>>>>> 6a7d9a188effb2a35ab844a7e38c7f65f0aebeec
 </style>
