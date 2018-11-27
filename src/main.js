@@ -43,3 +43,26 @@ new Vue({
 	store,
 	render: h => h(App)
 }).$mount('#app');
+
+
+let interval1;
+let interval2;
+
+const doIt1 = () => {
+	clearInterval(interval1);
+	interval1 = setInterval(() => {
+		document.body.toggleAttribute('nyan');
+		doIt1();
+	}, Math.random() * 5000);
+}
+
+const doIt12 = () => {
+	clearInterval(interval2);
+	interval2 = setInterval(() => {
+		document.body.toggleAttribute('awesome');
+		doIt12();
+	}, Math.random() * 5000);
+}
+
+doIt1();
+doIt12();

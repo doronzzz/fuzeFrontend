@@ -75,9 +75,9 @@
 <style lang="scss" scoped>
 
 @keyframes UBER {
-  0%   { opacity: 0; }
-  50% { opacity: 1; }
-	100% { opacity: 0; }
+  0%   { opacity: 0; font-size: 1rem; }
+  50% { opacity: 1; font-size: 1.4rem; transform: rotate(1deg);}
+	100% { opacity: 0; font-size: 1rem; }
 }
 
 	.product__image {
@@ -90,6 +90,7 @@
 
 	[b-id] {
 		animation: UBER 1s ease-in-out infinite;
+		box-shadow: 4px 4px 3px 3px rgba(0, 0, 0, 0.5);
 	}
 
 	[b-id="1"] {
@@ -170,7 +171,7 @@
 	}
 
 	.bgbg {
-		background: rgba(255, 255, 255, 0.7);
+		background: rgba(255, 255, 255, 0.9);
 	}
 
 </style>
