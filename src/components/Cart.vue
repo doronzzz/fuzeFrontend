@@ -73,6 +73,7 @@
     border: 1px solid #ddd;
     overflow: hidden;
 		max-width: 10rem;
+		flex: 1 0 auto;
 	}
 
 	.card:not(:last-of-type) {
