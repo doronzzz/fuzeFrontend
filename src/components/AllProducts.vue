@@ -1,20 +1,24 @@
 <template>
     <div class="all-products">
         <h1>Our Must-Have Products!</h1>
-        <div v-for="product in products" class="card" style="width: 18rem;">
-            <img class="card-img-top" src="" alt="Yet another must have product">
-            <div class="card-body">
-                <h5 class="card-title">{{product.title}}</h5>
-                <p class="card-text">{{product.description}}</p>
-                <a href="#" class="btn btn-primary" @click="goToProductPage(product, $event)">Details...</a>
-            </div>
-        </div>
-        <div class="">
-        </div>
+        <b-card v-for="product in products" :key="product.id" :title="product.title"
+                :img-src="product.imageUrl"
+                :img-alt="product.title"
+                img-top
+                tag="article"
+                style="max-width: 20rem;"
+                class="mb-2">
+            <p class="card-text">
+                {{product.description}}
+            </p>
+            <b-button href="#" variant="primary" @click="goToProductPage(product, $event)">Details...</b-button>
+        </b-card>
     </div>
 </template>
 
 <script>
+    import {getProducts} from "../services/shop";
+
     export default {
         name: 'all-products',
         data: function () {
@@ -22,25 +26,26 @@
                 products: [
                     {
                         title: "First product",
-                        description: "The description of the first product"
+                        description: "The description of the first product",
+                        imageUrl: "aaa"
                     },
                     {
                         title: "Second product",
-                        description: "The description of the second product"
+                        description: "The description of the second product",
+                        imageUrl: "aaa"
                     },
                 ]
             }
         },
-        mount:
-            {
-                // prepare all products to show
-                //localStorage.getItem();
+        created: () => {
+            // products: getProducts();
+            // prepare all products to show
+            //localStorage.getItem();
 
-            }
-        ,
+        },
         goToProductPage: (product, ev) => {
             // change route to the product page.
-            router.push({path: `/product/${product.id}`})
+            this.$router.push({path: `/product/${product.id}`})
         }
     }
 </script>
